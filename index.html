@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Règlement Pôle Illégal | Portail Officiel Weaves FA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        rp: {
+                            bg: '#09090b',
+                            card: '#121216',
+                            cardHover: '#1a1a21',
+                            border: '#27272a',
+                            crimson: '#e11d48',
+                            crimsonLight: '#fb7185',
+                            amber: '#f59e0b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Personnalisation de la barre de défilement */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
+        }
+        .glass-panel {
+            background: rgba(18, 18, 22, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .crimson-glow {
+            box-shadow: 0 0 28px rgba(225, 29, 72, 0.14);
+        }
+        .amber-glow {
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.12);
+        }
+    </style>
+</head>
+<body class="bg-rp-bg text-gray-200 font-sans antialiased selection:bg-rose-500/30 selection:text-rose-200">
+
+    <!-- Barre de progression de lecture en haut -->
+    <div class="fixed top-0 left-0 right-0 h-1 bg-zinc-900 z-50">
+        <div id="reading-progress" class="h-full bg-gradient-to-r from-rose-600 via-red-500 to-amber-500 w-0 transition-all duration-150"></div>
+    </div>
+
+    <!-- En-tête Mobile -->
+    <header class="lg:hidden fixed top-1 left-0 right-0 z-40 glass-panel border-b border-zinc-800 px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-rose-600 to-red-700 flex items-center justify-center text-white font-bold shadow-lg">
+                <i class="fa-solid fa-skull"></i>
+            </div>
+            <div>
+                <span class="font-bold text-white text-sm block leading-tight">PÔLE ILLÉGAL</span>
+                <span class="text-[11px] text-rose-400 font-medium">Weaves FA • Règlement RP</span>
+            </div>
+        </div>
+        <button id="mobile-menu-btn" class="p-2.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-gray-200 transition">
+            <i class="fa-solid fa-bars text-lg"></i>
+        </button>
+    </header>
+
+    <!-- Overlay Mobile -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/75 z-40 hidden lg:hidden backdrop-blur-sm"></div>
+
+    <!-- Barre Latérale de Navigation (Sidebar) -->
+    <aside id="sidebar" class="fixed top-0 left-0 bottom-0 w-72 bg-[#0d0d11] border-r border-zinc-800/90 z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col">
+        <!-- Logo & Titre -->
+        <div class="p-6 border-b border-zinc-800/80">
+            <div class="flex items-center gap-3.5">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-rose-600 to-red-800 flex items-center justify-center text-white text-xl font-extrabold shadow-lg shadow-rose-600/25">
+                    <i class="fa-solid fa-skull-crossbones"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-white tracking-wide text-base">PÔLE ILLÉGAL</h1>
+                    <div class="flex items-center gap-1.5 mt-0.5">
+                        <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                        <span class="text-xs text-gray-400 font-medium">Weaves FA • Semi-Réaliste</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu de Navigation -->
+        <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-1.5" id="nav-links">
+            <p class="px-3 text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-2">Documentation Criminelle</p>
+            
+            <a href="#chapitre-1" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-300 hover:bg-zinc-800/70 hover:text-white transition group">
+                <span class="w-7 h-7 rounded-lg bg-rose-500/15 text-rose-400 flex items-center justify-center group-hover:bg-rose-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-gun text-xs"></i>
+                </span>
+                <span>1. Armurerie & Tarifs Armes</span>
+            </a>
+
+            <a href="#chapitre-2" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-300 hover:bg-zinc-800/70 hover:text-white transition group">
+                <span class="w-7 h-7 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-flask-vial text-xs"></i>
+                </span>
+                <span>2. Laboratoires & Drogues</span>
+            </a>
+
+            <a href="#chapitre-3" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-300 hover:bg-zinc-800/70 hover:text-white transition group">
+                <span class="w-7 h-7 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center group-hover:bg-amber-500 group-hover:text-zinc-950 transition">
+                    <i class="fa-solid fa-map-location-dot text-xs"></i>
+                </span>
+                <span>3. Territoires & Affrontements</span>
+            </a>
+
+            <a href="#chapitre-4" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-300 hover:bg-zinc-800/70 hover:text-white transition group">
+                <span class="w-7 h-7 rounded-lg bg-purple-500/15 text-purple-400 flex items-center justify-center group-hover:bg-purple-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-user-ninja text-xs"></i>
+                </span>
+                <span>4. Groupes, Alliances & Actions</span>
+            </a>
+
+            <a href="#chapitre-5" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-300 hover:bg-zinc-800/70 hover:text-white transition group">
+                <span class="w-7 h-7 rounded-lg bg-red-500/15 text-red-400 flex items-center justify-center group-hover:bg-red-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-triangle-exclamation text-xs"></i>
+                </span>
+                <span>5. Règles d'Or & Sanctions</span>
+            </a>
+        </nav>
+
+        <!-- Pied de Sidebar -->
+        <div class="p-4 border-t border-zinc-800/80 bg-zinc-900/40">
+            <div class="flex items-center justify-between text-xs text-gray-400 mb-1.5">
+                <span>Progression lecture</span>
+                <span id="sidebar-progress-text" class="font-bold text-rose-400">0%</span>
+            </div>
+            <div class="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                <div id="sidebar-progress-bar" class="h-full bg-rose-500 w-0 transition-all duration-150"></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Contenu Principal -->
+    <main class="lg:pl-72 pt-16 lg:pt-0 min-h-screen">
+        
+        <!-- Barre supérieure (Recherche + Statut) -->
+        <div class="sticky top-14 lg:top-0 z-30 glass-panel border-b border-zinc-800/80 px-4 sm:px-8 py-3.5">
+            <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                <!-- Barre de recherche instantanée -->
+                <div class="relative flex-1 max-w-xl">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400 text-sm"></i>
+                    <input type="text" id="search-input" placeholder="Rechercher une arme, un labo, une drogue, une zone (ex: AK-47, Meth, Raton Canyon...)" 
+                           class="w-full bg-zinc-900/90 border border-zinc-700/80 focus:border-rose-500 rounded-xl pl-10 pr-20 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-rose-500/20 transition">
+                    <button id="clear-search" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-xs text-zinc-400 hover:text-white bg-zinc-800 px-2 py-0.5 rounded">
+                        Effacer
+                    </button>
+                </div>
+
+                <!-- Badge Info -->
+                <div class="flex items-center justify-between sm:justify-end gap-3 text-xs">
+                    <span id="search-count" class="hidden text-rose-400 font-medium"></span>
+                    <span class="px-3 py-1.5 rounded-lg bg-rose-500/10 border border-rose-500/25 text-rose-400 font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-fire"></i> Weaves FA • Illégal v2.4
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteneur des Sections -->
+        <div id="content-wrapper" class="max-w-5xl mx-auto px-4 sm:px-8 py-8 sm:py-12 space-y-16">
+
+            <!-- HERO BANNER -->
+            <section class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-zinc-900 via-[#1b1014] to-zinc-950 border border-zinc-800 p-6 sm:p-10 crimson-glow">
+                <div class="absolute top-0 right-0 -mt-12 -mr-12 w-72 h-72 bg-rose-600/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 -mb-12 -ml-12 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="relative z-10">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs font-semibold mb-4">
+                        <i class="fa-solid fa-skull"></i> Charte Officielle du Milieu Criminel • Weaves FA
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
+                        Règlement du <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-amber-400">Pôle Illégal</span>
+                    </h1>
+                    <p class="text-gray-300 text-base sm:text-lg max-w-3xl leading-relaxed mb-6">
+                        Bienvenue sur la documentation officielle encadrant les gangs, organisations criminelles, trafics de stupéfiants, ventes d'armes et guerres de territoires. L'illégal repose sur le <strong class="text-white">fair-play</strong>, la <strong class="text-white">cohérence RP</strong> et une économie <strong class="text-rose-400">semi-réaliste</strong>.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="#chapitre-1" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-sm transition flex items-center gap-2 shadow-lg shadow-rose-600/25">
+                            <i class="fa-solid fa-gun"></i> Grille Tarifaire Armes
+                        </a>
+                        <a href="#chapitre-2" class="px-5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-700 font-semibold text-sm transition flex items-center gap-2">
+                            <i class="fa-solid fa-flask-vial text-emerald-400"></i> Labos & Prix Drogues
+                        </a>
+                        <a href="#chapitre-3" class="px-5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-700 font-semibold text-sm transition flex items-center gap-2">
+                            <i class="fa-solid fa-crosshairs text-amber-400"></i> Zones d'Affrontement
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- CHAPITRE 1 : ARMURERIE & GRILLE TARIFAIRE DES ARMES                   -->
+            <!-- ===================================================================== -->
+            <section id="chapitre-1" class="rule-section scroll-mt-24 space-y-6">
+                <div class="flex items-center gap-3 border-b border-zinc-800 pb-4">
+                    <span class="w-10 h-10 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-400 flex items-center justify-center font-bold text-lg">1</span>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white">Armurerie & Grille Tarifaire des Armes</h2>
+                        <p class="text-sm text-gray-400">Tarifs officiels du marché noir par catégorie d'armement et calculateur de commande</p>
+                    </div>
+                </div>
+
+                <!-- Filtres par catégorie d'armes -->
+                <div class="flex flex-wrap gap-2" id="weapon-filters">
+                    <button data-cat="all" class="weapon-filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-rose-600 text-white transition">
+                        Toutes les armes (23)
+                    </button>
+                    <button data-cat="blanche" class="weapon-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-zinc-800 text-gray-300 hover:bg-zinc-700 transition">
+                        <i class="fa-solid fa-khanda mr-1.5 text-zinc-400"></i>Armes Blanches (8)
+                    </button>
+                    <button data-cat="poing" class="weapon-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-zinc-800 text-gray-300 hover:bg-zinc-700 transition">
+                        <i class="fa-solid fa-gun mr-1.5 text-blue-400"></i>Armes de Poing (7)
+                    </button>
+                    <button data-cat="smg" class="weapon-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-zinc-800 text-gray-300 hover:bg-zinc-700 transition">
+                        <i class="fa-solid fa-bolt mr-1.5 text-amber-400"></i>Micro SMG (3)
+                    </button>
+                    <button data-cat="pompe" class="weapon-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-zinc-800 text-gray-300 hover:bg-zinc-700 transition">
+                        <i class="fa-solid fa-burst mr-1.5 text-orange-400"></i>Fusils à Pompe (2)
+                    </button>
+                    <button data-cat="assaut" class="weapon-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-zinc-800 text-gray-300 hover:bg-zinc-700 transition">
+                        <i class="fa-solid fa-crosshairs mr-1.5 text-rose-400"></i>Fusils d'Assaut (3)
+                    </button>
+                </div>
+
+                <!-- Grille des Armes (Générée dynamiquement) -->
+                <div id="weapons-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Rempli par JS -->
+                </div>
+
+                <!-- Simulateur de Commande d'Armement -->
+                <div class="bg-gradient-to-r from-[#121216] to-[#1c1317] border border-rose-500/30 rounded-2xl p-6 crimson-glow">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-rose-600 text-white flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-lg">Simulateur d'Achat d'Armement</h3>
+                            <p class="text-xs text-gray-400">Estimez le budget total d'une commande d'armes pour votre groupe</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-400 uppercase mb-1.5">Sélectionner une arme</label>
+                            <select id="calc-weapon-select" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:border-rose-500 focus:outline-none">
+                                <!-- Options générées par JS -->
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-400 uppercase mb-1.5">Quantité souhaitée</label>
+                            <input type="number" id="calc-weapon-qty" value="1" min="1" max="50"
+                                   class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:border-rose-500 focus:outline-none">
+                        </div>
+                        <div class="bg-zinc-950/90 border border-zinc-800 rounded-xl p-3 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-gray-400 block">Prix unitaire : <strong id="calc-weapon-unit" class="text-gray-200">20 000 $</strong></span>
+                                <span class="text-xs text-gray-400 block">Catégorie : <strong id="calc-weapon-cat" class="text-rose-400">Arme Blanche</strong></span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-[11px] text-zinc-500 uppercase block">Total Commande</span>
+                                <span id="calc-weapon-total" class="text-lg font-extrabold text-rose-400">20 000 $</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- CHAPITRE 2 : LABORATOIRES & PRIX DES DROGUES                          -->
+            <!-- ===================================================================== -->
+            <section id="chapitre-2" class="rule-section scroll-mt-24 space-y-6">
+                <div class="flex items-center gap-3 border-b border-zinc-800 pb-4">
+                    <span class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center font-bold text-lg">2</span>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white">Laboratoires & Prix des Drogues</h2>
+                        <p class="text-sm text-gray-400">Coûts d'acquisition des laboratoires, tarifs de revente et simulateur de rentabilité</p>
+                    </div>
+                </div>
+
+                <!-- 2.1 Prix des Laboratoires -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-industry text-emerald-400"></i> 2.1. Tarifs Officiels des Laboratoires
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-rp-card border border-zinc-800 hover:border-emerald-500/40 rounded-2xl p-5 transition">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-cannabis text-lg"></i>
+                                </span>
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400">Entrée de gamme</span>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Laboratoire de Weed</h4>
+                            <p class="text-2xl font-extrabold text-emerald-400 mt-2">150 000 $</p>
+                            <p class="text-xs text-gray-400 mt-1">Production de cannabis</p>
+                        </div>
+
+                        <div class="bg-rp-card border border-zinc-800 hover:border-blue-500/40 rounded-2xl p-5 transition">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-snowflake text-lg"></i>
+                                </span>
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400">Intermédiaire</span>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Laboratoire de Cocaïne</h4>
+                            <p class="text-2xl font-extrabold text-blue-400 mt-2">350 000 $</p>
+                            <p class="text-xs text-gray-400 mt-1">Transformation feuille de coca</p>
+                        </div>
+
+                        <div class="bg-rp-card border border-zinc-800 hover:border-purple-500/40 rounded-2xl p-5 transition">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="w-10 h-10 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-pills text-lg"></i>
+                                </span>
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-400">Haut risque</span>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Laboratoire de Fentanyl</h4>
+                            <p class="text-2xl font-extrabold text-purple-400 mt-2">400 000 $</p>
+                            <p class="text-xs text-gray-400 mt-1">Synthèse pharmaceutique lourde</p>
+                        </div>
+
+                        <div class="bg-rp-card border border-zinc-800 hover:border-amber-500/40 rounded-2xl p-5 transition">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-gem text-lg"></i>
+                                </span>
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400">Haut rendement</span>
+                            </div>
+                            <h4 class="font-bold text-white text-base">Laboratoire de Meth</h4>
+                            <p class="text-2xl font-extrabold text-amber-400 mt-2">450 000 $</p>
+                            <p class="text-xs text-gray-400 mt-1">Cuisson méthamphétamine pure</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2.2 Prix de revente des Drogues -->
+                <div class="bg-rp-card border border-zinc-800 rounded-2xl p-6">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-sack-dollar text-amber-400"></i> 2.2. Grille des Prix de Revente des Drogues
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-4 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-cannabis"></i>
+                                </div>
+                                <div>
+                                    <span class="font-bold text-white block">Weed</span>
+                                    <span class="text-xs text-gray-400">Revente à l'unité</span>
+                                </div>
+                            </div>
+                            <span class="text-xl font-extrabold text-emerald-400">250 $</span>
+                        </div>
+
+                        <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-4 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-blue-500/15 text-blue-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-snowflake"></i>
+                                </div>
+                                <div>
+                                    <span class="font-bold text-white block">Cocaïne</span>
+                                    <span class="text-xs text-gray-400">Revente à l'unité</span>
+                                </div>
+                            </div>
+                            <span class="text-xl font-extrabold text-blue-400">500 $</span>
+                        </div>
+
+                        <div class="bg-zinc-900/80 border border-zinc-800 rounded-xl p-4 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-gem"></i>
+                                </div>
+                                <div>
+                                    <span class="font-bold text-white block">Meth</span>
+                                    <span class="text-xs text-gray-400">Revente à l'unité</span>
+                                </div>
+                            </div>
+                            <span class="text-xl font-extrabold text-amber-400">650 $</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulateur de Rentabilité Drogue -->
+                <div class="bg-gradient-to-r from-[#121216] to-[#111c18] border border-emerald-500/30 rounded-2xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500 text-zinc-950 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-lg">Simulateur de Revenus & Amortissement Labo</h3>
+                            <p class="text-xs text-gray-400">Calculez vos gains de revente et le nombre d'unités pour rentabiliser votre laboratoire</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-400 uppercase mb-1.5">Type de Drogue</label>
+                            <select id="drug-type" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:border-emerald-500 focus:outline-none">
+                                <option value="weed">Weed — 250 $ / u (Labo : 150 000 $)</option>
+                                <option value="coke">Cocaïne — 500 $ / u (Labo : 350 000 $)</option>
+                                <option value="meth">Meth — 650 $ / u (Labo : 450 000 $)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-400 uppercase mb-1.5">Quantité vendue (pochons / unités)</label>
+                            <input type="number" id="drug-qty" value="200" min="1" max="100000" step="10"
+                                   class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:border-emerald-500 focus:outline-none">
+                        </div>
+                        <div class="bg-zinc-950/90 border border-zinc-800 rounded-xl p-3 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-gray-400 block">Seuil rentabilité labo : <strong id="drug-breakeven" class="text-amber-400">600 u.</strong></span>
+                                <span class="text-xs text-gray-400 block">Prix unitaire : <strong id="drug-unit-price" class="text-gray-200">250 $</strong></span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-[11px] text-zinc-500 uppercase block">Gains estimés</span>
+                                <span id="drug-total-gain" class="text-lg font-extrabold text-emerald-400">50 000 $</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- CHAPITRE 3 : AFFRONTEMENTS DE TERRITOIRE & REVENDICATIONS             -->
+            <!-- ===================================================================== -->
+            <section id="chapitre-3" class="rule-section scroll-mt-24 space-y-6">
+                <div class="flex items-center gap-3 border-b border-zinc-800 pb-4">
+                    <span class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center font-bold text-lg">3</span>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white">Affrontements de Territoire & Revendications</h2>
+                        <p class="text-sm text-gray-400">Zones officielles d'engagement et protocole de prise de contrôle d'un point</p>
+                    </div>
+                </div>
+
+                <!-- Encart explicatif Revendication -->
+                <div class="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-6 flex items-start gap-4 amber-glow">
+                    <div class="w-11 h-11 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
+                        <i class="fa-solid fa-flag text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-amber-300 text-lg">Principe des Affrontements & Revendications</h3>
+                        <p class="text-sm text-gray-200 mt-1.5 leading-relaxed">
+                            Les zones ci-dessous sont dédiées à <strong class="text-white">engager officiellement une revendication</strong> entre groupes criminels.
+                        </p>
+                        <div class="mt-3 p-3.5 rounded-xl bg-zinc-950/70 border border-amber-500/20 text-sm text-gray-300">
+                            <strong class="text-amber-400"><i class="fa-solid fa-lightbulb mr-1.5"></i>Exemple concret :</strong> Si un groupe souhaite récupérer un <strong class="text-white">point de drogue</strong> (récolte, traitement ou revente) détenu par un autre groupe rival, un affrontement officiel est déclenché sur l'une de ces zones afin de valider la revendication du territoire.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Les 5 Zones d'Affrontement Officielles -->
+                <div>
+                    <h3 class="text-base font-bold text-white mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-location-crosshairs text-rose-400"></i> Les 5 Zones Officielles d'Affrontement
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-rp-card border border-zinc-800 hover:border-rose-500/40 rounded-2xl p-5 flex items-start gap-3.5 transition">
+                            <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-mountain"></i>
+                            </div>
+                            <div>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-rose-400">Zone Nord-Ouest</span>
+                                <h4 class="font-bold text-white text-base mt-0.5">Raton Canyon</h4>
+                                <p class="text-xs text-gray-400 mt-1">Gorges escarpées et reliefs naturels propices aux embuscades et combats tactiques longue/moyenne distance.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-rp-card border border-zinc-800 hover:border-rose-500/40 rounded-2xl p-5 flex items-start gap-3.5 transition">
+                            <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-anchor"></i>
+                            </div>
+                            <div>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-rose-400">Zone Sud / Docks</span>
+                                <h4 class="font-bold text-white text-base mt-0.5">Port Sud Los Santos</h4>
+                                <p class="text-xs text-gray-400 mt-1">Docks industriels, conteneurs et hangars portuaires pour affrontements urbains rapprochés.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-rp-card border border-zinc-800 hover:border-rose-500/40 rounded-2xl p-5 flex items-start gap-3.5 transition">
+                            <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-tree"></i>
+                            </div>
+                            <div>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-rose-400">Zone Ouest</span>
+                                <h4 class="font-bold text-white text-base mt-0.5">Tongva Valley</h4>
+                                <p class="text-xs text-gray-400 mt-1">Vallée boisée et vignobles offrant de nombreux couverts naturels entre Los Santos et Zancudo.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-rp-card border border-zinc-800 hover:border-rose-500/40 rounded-2xl p-5 flex items-start gap-3.5 transition">
+                            <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-sun"></i>
+                            </div>
+                            <div>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-rose-400">Zone Centre / Nord</span>
+                                <h4 class="font-bold text-white text-base mt-0.5">Grand Senora Desert</h4>
+                                <p class="text-xs text-gray-400 mt-1">Vaste étendue désertique de Blaine County idéale pour les affrontements motorisés et positions de tir.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-rp-card border border-zinc-800 hover:border-rose-500/40 rounded-2xl p-5 flex items-start gap-3.5 transition sm:col-span-2 lg:col-span-2">
+                            <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-plane-departure"></i>
+                            </div>
+                            <div>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-rose-400">Zone Sandy Shores</span>
+                                <h4 class="font-bold text-white text-base mt-0.5">Aéroport Trevor (Sandy Shores Airfield)</h4>
+                                <p class="text-xs text-gray-400 mt-1">Piste d'aviation désaffectée et hangars du désert pour affrontements majeurs de revendication territoriale.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Protocole de déroulement d'une revendication -->
+                <div class="bg-rp-card border border-zinc-800 rounded-2xl p-6">
+                    <h3 class="font-bold text-white text-base mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-amber-400"></i> Protocole Obligatoire d'une Revendication
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="p-4 rounded-xl bg-zinc-900/70 border border-zinc-800">
+                            <span class="text-xs font-bold text-rose-400 uppercase block mb-1">Étape 1 • Déclaration RP</span>
+                            <p class="text-gray-300">Le groupe attaquant doit revendiquer le point en RP auprès du groupe détenteur (menace, ultimatum ou rendez-vous) avant tout déclenchement de tir.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-zinc-900/70 border border-zinc-800">
+                            <span class="text-xs font-bold text-amber-400 uppercase block mb-1">Étape 2 • Affrontement sur Zone</span>
+                            <p class="text-gray-300">L'affrontement se déroule exclusivement sur la zone définie, sans intervention de groupes tiers ni retour sur zone (NLR) après mise au sol.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-zinc-900/70 border border-zinc-800">
+                            <span class="text-xs font-bold text-emerald-400 uppercase block mb-1">Étape 3 • Issue & Cooldown</span>
+                            <p class="text-gray-300">Le vainqueur obtient le contrôle du point de drogue. Le groupe perdant doit respecter un délai de <strong>72h</strong> avant toute nouvelle tentative de reprise.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- CHAPITRE 4 : GROUPES, ALLIANCES & ACTIONS CRIMINELLES                 -->
+            <!-- ===================================================================== -->
+            <section id="chapitre-4" class="rule-section scroll-mt-24 space-y-6">
+                <div class="flex items-center gap-3 border-b border-zinc-800 pb-4">
+                    <span class="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center font-bold text-lg">4</span>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white">Groupes, Alliances & Actions Criminelles</h2>
+                        <p class="text-sm text-gray-400">Effectifs en action, règles de braquages, prises d'otages et relations entre groupes</p>
+                    </div>
+                </div>
+
+                <!-- Onglets dynamiques -->
+                <div class="flex flex-wrap gap-2" id="illegal-tabs">
+                    <button data-tab="groupes" class="illegal-tab-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-rose-600 text-white transition">
+                        <i class="fa-solid fa-users-rays mr-1.5"></i>Gangs & Organisations
+                    </button>
+                    <button data-tab="alliances" class="illegal-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-zinc-800 text-gray-300 hover:bg-zinc-700 transition">
+                        <i class="fa-solid fa-handshake-slash mr-1.5"></i>Alliances & Guerres
+                    </button>
+                    <button data-tab="braquages" class="illegal-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-zinc-800 text-gray-300 hover:bg-zinc-700 transition">
+                        <i class="fa-solid fa-vault mr-1.5"></i>Braquages & Otages
+                    </button>
+                    <button data-tab="loot" class="illegal-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-zinc-800 text-gray-300 hover:bg-zinc-700 transition">
+                        <i class="fa-solid fa-sack-xmark mr-1.5"></i>Racket & Fouilles
+                    </button>
+                </div>
+
+                <!-- Contenu des onglets -->
+                <div id="illegal-tab-content" class="bg-rp-card border border-zinc-800 rounded-2xl p-6">
+                    <!-- Rempli par JS -->
+                </div>
+            </section>
+
+            <!-- ===================================================================== -->
+            <!-- CHAPITRE 5 : RÈGLES D'OR RP & SANCTIONS                               -->
+            <!-- ===================================================================== -->
+            <section id="chapitre-5" class="rule-section scroll-mt-24 space-y-6">
+                <div class="flex items-center gap-3 border-b border-zinc-800 pb-4">
+                    <span class="w-10 h-10 rounded-xl bg-red-500/15 border border-red-500/30 text-red-400 flex items-center justify-center font-bold text-lg">5</span>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white">Règles d'Or RP & Échelle des Sanctions</h2>
+                        <p class="text-sm text-gray-400">Fair-play, Fear RP, Mass RP et sanctions du Pôle Illégal</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <!-- Règles fondamentales -->
+                    <div class="bg-rp-card border border-zinc-800 rounded-2xl p-6 space-y-4">
+                        <h3 class="font-bold text-white text-base flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-rose-400"></i> Règles Fondamentales en Illégal
+                        </h3>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-rose-400 mt-1"></i>
+                                <span><strong>Fear RP strict :</strong> Vous devez craindre pour votre vie lorsque vous êtes braqué à bout portant (2 armes ou plus pointées sur vous) et coopérer sans tenter de sortir une arme.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-rose-400 mt-1"></i>
+                                <span><strong>Mass RP :</strong> Les commissariats, hôpitaux, casernes militaires et bâtiments gouvernementaux sont considérés comme surpeuplés en permanence. Interdiction d'y lancer des assauts gratuits.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-rose-400 mt-1"></i>
+                                <span><strong>No Pain / Fair-Play :</strong> Les accidents graves à haute vitesse doivent être joués. Le "Win RP" (chercher à gagner à tout prix au détriment de la scène) est sanctionné.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-rose-400 mt-1"></i>
+                                <span><strong>Carkill & Pit abusif :</strong> Il est strictement interdit d'écraser volontairement des joueurs ou de tamponner à plus de 150 km/h lors d'une course-poursuite.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Sanctions Pôle Illégal -->
+                    <div class="bg-rp-card border border-zinc-800 rounded-2xl p-6 space-y-4">
+                        <h3 class="font-bold text-white text-base flex items-center gap-2">
+                            <i class="fa-solid fa-gavel text-amber-400"></i> Sanctions du Pôle Illégal
+                        </h3>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-triangle-exclamation text-amber-400 mt-1"></i>
+                                <span><strong>Warn Groupe (3 Warns = Dissolution) :</strong> Tout manquement collectif (alliance illégale, non-respect d'une zone d'affrontement, retour sur zone) entraîne un avertissement officiel sur le groupe.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-ban text-rose-400 mt-1"></i>
+                                <span><strong>Saisie d'Arsenal & Labos :</strong> En cas d'abus d'armes lourdes, de duplication ou de non-respect de la grille tarifaire, le Staff procède à la saisie complète des coffres et laboratoires.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-skull text-red-500 mt-1"></i>
+                                <span><strong>Mort RP / Wipe Illégal :</strong> Un chef ou membre de groupe capturé dans le cadre d'un dossier de Mort RP validé par le Staff perd définitivement son personnage et ses biens illégaux.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="border-t border-zinc-800/80 py-8 px-4 text-center text-xs text-zinc-500">
+            <p>Portail Officiel du Pôle Illégal • Weaves FA — GTA RP (FiveM)</p>
+            <p class="mt-1">Le respect de la grille tarifaire et des zones d'affrontement garantit l'équilibre de l'économie criminelle.</p>
+        </footer>
+    </main>
+
+    <script>
+        // =========================================================================
+        // 1. DONNÉES EXACTES DE L'ARMURERIE
+        // =========================================================================
+        const weaponsData = [
+            // Armes Blanches
+            { name: "Couteau de combat", price: 20000, cat: "blanche", catLabel: "Arme Blanche", icon: "fa-khanda" },
+            { name: "Poing américain", price: 25000, cat: "blanche", catLabel: "Arme Blanche", icon: "fa-hand-fist" },
+            { name: "Pied de biche", price: 30000, cat: "blanche", catLabel: "Arme Blanche", icon: "fa-wrench" },
+            { name: "Marteau", price: 30000, cat: "blanche", catLabel: "Arme Blanche", icon: "fa-hammer" },
+            { name: "Cran d'arrêt", price: 30000, cat: "blanche", catLabel: "Arme Blanche", icon: "fa-khanda" },
+            { name: "Dague", price: 40000, cat: "blanche", catLabel: "Arme Blanche", icon: "fa-khanda" },
+            { name: "Machette", price: 40000, cat: "blanche", catLabel: "Arme Blanche", icon: "fa-khanda" },
+            { name: "Katana", price: 60000, cat: "blanche", catLabel: "Arme Blanche", icon: "fa-khanda" },
+
+            // Armes de Poing
+            { name: "SNS", price: 70000, cat: "poing", catLabel: "Arme de Poing", icon: "fa-gun" },
+            { name: "Céramique", price: 90000, cat: "poing", catLabel: "Arme de Poing", icon: "fa-gun" },
+            { name: "Pistolet", price: 120000, cat: "poing", catLabel: "Arme de Poing", icon: "fa-gun" },
+            { name: "Pistolet Vintage", price: 150000, cat: "poing", catLabel: "Arme de Poing", icon: "fa-gun" },
+            { name: "Double Action", price: 170000, cat: "poing", catLabel: "Arme de Poing", icon: "fa-gun" },
+            { name: "Heavy Pistol", price: 180000, cat: "poing", catLabel: "Arme de Poing", icon: "fa-gun" },
+            { name: "AP Pistol", price: 200000, cat: "poing", catLabel: "Arme de Poing", icon: "fa-gun" },
+
+            // Micro SMG
+            { name: "Scorpion", price: 400000, cat: "smg", catLabel: "Micro SMG", icon: "fa-bolt" },
+            { name: "TEK-9", price: 420000, cat: "smg", catLabel: "Micro SMG", icon: "fa-bolt" },
+            { name: "Micro UZI", price: 460000, cat: "smg", catLabel: "Micro SMG", icon: "fa-bolt" },
+
+            // Fusils à Pompe
+            { name: "Double Canon (1 main)", price: 600000, cat: "pompe", catLabel: "Fusil à Pompe", icon: "fa-burst" },
+            { name: "Canon Scié", price: 750000, cat: "pompe", catLabel: "Fusil à Pompe", icon: "fa-burst" },
+
+            // Fusils d'Assaut
+            { name: "AK Compact", price: 1000000, cat: "assaut", catLabel: "Fusil d'Assaut", icon: "fa-crosshairs" },
+            { name: "AK-47", price: 1200000, cat: "assaut", catLabel: "Fusil d'Assaut", icon: "fa-crosshairs" },
+            { name: "Gusenberg", price: 1200000, cat: "assaut", catLabel: "Fusil d'Assaut", icon: "fa-crosshairs" }
+        ];
+
+        const badgeColors = {
+            blanche: "bg-zinc-500/15 text-zinc-300 border-zinc-500/30",
+            poing: "bg-blue-500/15 text-blue-400 border-blue-500/30",
+            smg: "bg-amber-500/15 text-amber-400 border-amber-500/30",
+            pompe: "bg-orange-500/15 text-orange-400 border-orange-500/30",
+            assaut: "bg-rose-500/15 text-rose-400 border-rose-500/30"
+        };
+
+        const weaponsGrid = document.getElementById('weapons-grid');
+
+        function renderWeapons(filter = 'all') {
+            const filtered = filter === 'all' ? weaponsData : weaponsData.filter(w => w.cat === filter);
+            weaponsGrid.innerHTML = filtered.map(w => `
+                <div class="weapon-card bg-rp-card border border-zinc-800 hover:border-rose-500/40 rounded-2xl p-4 flex items-center justify-between transition">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-rose-400">
+                            <i class="fa-solid ${w.icon}"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm sm:text-base">${w.name}</h4>
+                            <span class="inline-block mt-1 px-2 py-0.5 rounded text-[11px] font-medium border ${badgeColors[w.cat]}">
+                                ${w.catLabel}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-base sm:text-lg font-extrabold text-amber-400">${w.price.toLocaleString('fr-FR')} $</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.querySelectorAll('.weapon-filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.weapon-filter-btn').forEach(b => {
+                    b.classList.remove('bg-rose-600', 'text-white');
+                    b.classList.add('bg-zinc-800', 'text-gray-300');
+                });
+                btn.classList.remove('bg-zinc-800', 'text-gray-300');
+                btn.classList.add('bg-rose-600', 'text-white');
+                renderWeapons(btn.dataset.cat);
+            });
+        });
+        renderWeapons('all');
+
+        // =========================================================================
+        // 2. SIMULATEUR DE COMMANDE D'ARMEMENT
+        // =========================================================================
+        const calcWeaponSelect = document.getElementById('calc-weapon-select');
+        const calcWeaponQty = document.getElementById('calc-weapon-qty');
+
+        weaponsData.forEach((w, idx) => {
+            const opt = document.createElement('option');
+            opt.value = idx;
+            opt.textContent = `${w.name} (${w.price.toLocaleString('fr-FR')} $)`;
+            calcWeaponSelect.appendChild(opt);
+        });
+
+        function updateWeaponCalc() {
+            const weapon = weaponsData[calcWeaponSelect.value];
+            const qty = Math.max(1, parseInt(calcWeaponQty.value) || 1);
+            const total = weapon.price * qty;
+
+            document.getElementById('calc-weapon-unit').textContent = weapon.price.toLocaleString('fr-FR') + ' $';
+            document.getElementById('calc-weapon-cat').textContent = weapon.catLabel;
+            document.getElementById('calc-weapon-total').textContent = total.toLocaleString('fr-FR') + ' $';
+        }
+
+        calcWeaponSelect.addEventListener('change', updateWeaponCalc);
+        calcWeaponQty.addEventListener('input', updateWeaponCalc);
+        updateWeaponCalc();
+
+        // =========================================================================
+        // 3. SIMULATEUR DE REVENUS & AMORTISSEMENT DROGUE
+        // =========================================================================
+        const drugConfig = {
+            weed: { price: 250, labCost: 150000 },
+            coke: { price: 500, labCost: 350000 },
+            meth: { price: 650, labCost: 450000 }
+        };
+
+        const drugType = document.getElementById('drug-type');
+        const drugQty = document.getElementById('drug-qty');
+
+        function updateDrugCalc() {
+            const cfg = drugConfig[drugType.value];
+            const qty = Math.max(1, parseInt(drugQty.value) || 1);
+            const total = cfg.price * qty;
+            const breakeven = Math.ceil(cfg.labCost / cfg.price);
+
+            document.getElementById('drug-unit-price').textContent = cfg.price.toLocaleString('fr-FR') + ' $';
+            document.getElementById('drug-breakeven').textContent = breakeven.toLocaleString('fr-FR') + ' u.';
+            document.getElementById('drug-total-gain').textContent = total.toLocaleString('fr-FR') + ' $';
+        }
+
+        drugType.addEventListener('change', updateDrugCalc);
+        drugQty.addEventListener('input', updateDrugCalc);
+        updateDrugCalc();
+
+        // =========================================================================
+        // 4. ONGLETS RÈGLES GROUPES, ALLIANCES & BRAQUAGES
+        // =========================================================================
+        const illegalTabsData = {
+            groupes: {
+                title: "Gangs de Quartier & Organisations Criminelles",
+                badge: "Cohérence RP & Hiérarchie",
+                rules: [
+                    "Les gangs de quartier (Families, Ballas, Vagos, Marabunta, etc.) doivent respecter l'identité de leur quartier, leurs couleurs et une hiérarchie crédible.",
+                    "Les organisations criminelles (Mafias, Cartels, MC) opèrent dans la discrétion, le business (trafic d'armes, laboratoires, blanchiment) et la diplomatie.",
+                    "Il est strictement interdit de recruter ou de virer un membre sans scène RP cohérente. Un membre quittant un groupe doit respecter un délai de 48h avant d'intégrer une faction rivale."
+                ]
+            },
+            alliances: {
+                title: "Alliances, Coalitions & Guerres de Territoire",
+                badge: "Interdiction du Bus RP",
+                rules: [
+                    "Les alliances permanentes entre plusieurs groupes armés pour écraser le reste de la ville ('Bus RP') sont strictement interdites.",
+                    "Une alliance ponctuelle est tolérée uniquement dans le cadre d'un échange commercial ou d'un contrat précis validé en RP, jamais lors d'un affrontement de revendication de territoire.",
+                    "Lors d'une guerre déclarée, les combats doivent rester propres : pas de tir depuis les toits inaccessibles sans échelle, pas de camp devant les hôpitaux ou QG ennemis."
+                ]
+            },
+            braquages: {
+                title: "Braquages & Prises d'Otages",
+                badge: "Fair-Play & Négociations",
+                rules: [
+                    "Il est strictement interdit d'utiliser un membre de son propre groupe ou un ami complice comme 'faux otage' lors d'un braquage.",
+                    "Les négociations avec la LSPD / BCSO sont obligatoires avant toute ouverture du feu. Les revendications doivent rester raisonnables et cohérentes.",
+                    "Aucun braquage majeur (Banque Centrale, Bijouterie) ne peut être lancé 30 minutes avant ou après un redémarrage (reboot) du serveur."
+                ]
+            },
+            loot: {
+                title: "Racket Civil & Fouilles",
+                badge: "Protection des Citoyens",
+                rules: [
+                    "Le racket d'un citoyen civil sans motif RP valable ('braquage gratuit en pleine rue') est interdit, particulièrement sur les nouveaux arrivants et travailleurs légaux en service.",
+                    "Il est interdit de vider intégralement l'inventaire ou le compte bancaire d'un joueur lors d'une fouille (interdiction de forcer un virement bancaire ou une vente de véhicule)."
+                ]
+            }
+        };
+
+        const illegalTabContent = document.getElementById('illegal-tab-content');
+        const illegalTabButtons = document.querySelectorAll('.illegal-tab-btn');
+
+        function renderIllegalTab(key) {
+            const data = illegalTabsData[key];
+            illegalTabContent.innerHTML = `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 mb-4 border-b border-zinc-800">
+                    <h3 class="text-xl font-bold text-white">${data.title}</h3>
+                    <span class="px-3 py-1 rounded-full bg-zinc-800 border border-zinc-700 text-xs font-semibold text-rose-400">${data.badge}</span>
+                </div>
+                <ul class="space-y-3">
+                    ${data.rules.map(rule => `
+                        <li class="flex items-start gap-3 text-sm text-gray-300 leading-relaxed">
+                            <span class="w-5 h-5 rounded-full bg-rose-500/15 text-rose-400 flex items-center justify-center shrink-0 mt-0.5 text-xs">
+                                <i class="fa-solid fa-skull"></i>
+                            </span>
+                            <span>${rule}</span>
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+        }
+
+        illegalTabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                illegalTabButtons.forEach(b => {
+                    b.classList.remove('bg-rose-600', 'text-white');
+                    b.classList.add('bg-zinc-800', 'text-gray-300');
+                });
+                btn.classList.remove('bg-zinc-800', 'text-gray-300');
+                btn.classList.add('bg-rose-600', 'text-white');
+                renderIllegalTab(btn.dataset.tab);
+            });
+        });
+        renderIllegalTab('groupes');
+
+        // =========================================================================
+        // 5. BARRE DE RECHERCHE INSTANTANÉE
+        // =========================================================================
+        const searchInput = document.getElementById('search-input');
+        const clearSearchBtn = document.getElementById('clear-search');
+        const searchCount = document.getElementById('search-count');
+        const sections = document.querySelectorAll('.rule-section');
+
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.trim().toLowerCase();
+            if (!query) {
+                clearSearchBtn.classList.add('hidden');
+                searchCount.classList.add('hidden');
+                sections.forEach(sec => sec.classList.remove('hidden'));
+                document.querySelectorAll('.weapon-card').forEach(c => c.classList.remove('hidden'));
+                return;
+            }
+
+            clearSearchBtn.classList.remove('hidden');
+            let visibleSections = 0;
+
+            sections.forEach(sec => {
+                const text = sec.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    sec.classList.remove('hidden');
+                    visibleSections++;
+                } else {
+                    sec.classList.add('hidden');
+                }
+            });
+
+            // Filtrer aussi les cartes d'armes individuellement si la section 1 est visible
+            document.querySelectorAll('.weapon-card').forEach(card => {
+                if (card.textContent.toLowerCase().includes(query)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            searchCount.textContent = `${visibleSections} section(s) trouvée(s)`;
+            searchCount.classList.remove('hidden');
+        });
+
+        clearSearchBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            searchInput.dispatchEvent(new Event('input'));
+            searchInput.focus();
+        });
+
+        // =========================================================================
+        // 6. NAVIGATION MOBILE & PROGRESSION DE LECTURE
+        // =========================================================================
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        mobileBtn.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+
+        document.querySelectorAll('.nav-item').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 1024) toggleSidebar();
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const percent = docHeight > 0 ? Math.min(100, Math.round((scrollTop / docHeight) * 100)) : 0;
+
+            document.getElementById('reading-progress').style.width = percent + '%';
+            document.getElementById('sidebar-progress-bar').style.width = percent + '%';
+            document.getElementById('sidebar-progress-text').textContent = percent + '%';
+        });
+    </script>
+</body>
+</html>
